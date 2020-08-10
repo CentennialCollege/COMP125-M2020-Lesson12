@@ -2,7 +2,7 @@
     // Function scoped Variables
     let stage: createjs.Stage;
     let helloLabel: UIObjects.Label;
-    let clickMeButton: createjs.Bitmap;
+    let clickMeButton: UIObjects.Button;
     let assets: createjs.LoadQueue;
 
 
@@ -30,6 +30,8 @@
 
         stage.enableMouseOver(20);
 
+        Config.Globals.AssetManifest = assets;
+
         Main();
     }
 
@@ -49,14 +51,7 @@
         stage.addChild(helloLabel);
 
         // button
-        clickMeButton = new createjs.Bitmap(assets.getResult("clickMeButton"));
-
-        clickMeButton.regX = clickMeButton.getBounds().width * 0.5;
-        clickMeButton.regY = clickMeButton.getBounds().height * 0.5;
-
-        clickMeButton.x = 320;
-        clickMeButton.y = 340;
-        
+        clickMeButton = new UIObjects.Button("clickMeButton", 320, 340, true);
         stage.addChild(clickMeButton);
 
         clickMeButton.on("click", ()=>{
@@ -70,13 +65,7 @@
             }
         });
 
-        clickMeButton.on("mouseover", ()=>{
-            clickMeButton.alpha = 0.7; // 70% opaque - 30% transparent
-        });
-
-        clickMeButton.on("mouseout", ()=>{
-            clickMeButton.alpha = 1.0; // 100% opaque - 0% transparent
-        });
+       
     }
 
     window.addEventListener("load", Preload);

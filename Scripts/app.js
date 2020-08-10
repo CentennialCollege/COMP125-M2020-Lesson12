@@ -22,6 +22,7 @@
         createjs.Ticker.framerate = 60; // 60 FPS or 16.667 ms
         createjs.Ticker.on("tick", Update);
         stage.enableMouseOver(20);
+        Config.Globals.AssetManifest = assets;
         Main();
     }
     // called every frame
@@ -35,11 +36,7 @@
         helloLabel = new UIObjects.Label("Holla, Mundo!", "60px", "Consolas", "#000000", 320, 240, true);
         stage.addChild(helloLabel);
         // button
-        clickMeButton = new createjs.Bitmap(assets.getResult("clickMeButton"));
-        clickMeButton.regX = clickMeButton.getBounds().width * 0.5;
-        clickMeButton.regY = clickMeButton.getBounds().height * 0.5;
-        clickMeButton.x = 320;
-        clickMeButton.y = 340;
+        clickMeButton = new UIObjects.Button("clickMeButton", 320, 340, true);
         stage.addChild(clickMeButton);
         clickMeButton.on("click", () => {
             if (helloLabel.text == "Adios, mundo cruel!") {
@@ -48,12 +45,6 @@
             else {
                 helloLabel.setText("Adios, mundo cruel!");
             }
-        });
-        clickMeButton.on("mouseover", () => {
-            clickMeButton.alpha = 0.7; // 70% opaque - 30% transparent
-        });
-        clickMeButton.on("mouseout", () => {
-            clickMeButton.alpha = 1.0; // 100% opaque - 0% transparent
         });
     }
     window.addEventListener("load", Preload);
