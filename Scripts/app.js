@@ -10,7 +10,7 @@
         assets.installPlugin(createjs.Sound);
         assets.on("complete", Start);
         assets.loadManifest([
-            { id: "clickMeButton", src: "../Assets/images/ClickMeButton.png" }
+            { id: "clickMeButton", src: "/Assets/images/ClickMeButton.png" }
         ]);
     }
     // This function triggers after everything has been preloaded
