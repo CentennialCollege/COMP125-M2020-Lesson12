@@ -1,7 +1,7 @@
 (function(){
     // Function scoped Variables
     let stage: createjs.Stage;
-    let helloLabel: createjs.Text;
+    let helloLabel: UIObjects.Label;
     let clickMeButton: createjs.Bitmap;
     let assets: createjs.LoadQueue;
 
@@ -14,7 +14,7 @@
         assets.on("complete", Start);
 
         assets.loadManifest([
-            {id:"clickMeButton", src:"/Assets/images/ClickMeButton.png"}
+            {id:"clickMeButton", src:"../Assets/images/ClickMeButton.png"}
         ]);
     }
 
@@ -45,13 +45,7 @@
     function Main():void
     {
         // label
-        helloLabel = new createjs.Text("Holla, Mundo!", "60px Consolas", "#000000");
-        helloLabel.regX = helloLabel.getMeasuredWidth() * 0.5;
-        helloLabel.regY = helloLabel.getMeasuredHeight() * 0.5;
-        
-        helloLabel.x = 320;
-        helloLabel.y = 240;
-    
+        helloLabel = new UIObjects.Label("Holla, Mundo!", "60px", "Consolas", "#000000", 320, 240, true);
         stage.addChild(helloLabel);
 
         // button
@@ -68,15 +62,11 @@
         clickMeButton.on("click", ()=>{
             if(helloLabel.text == "Adios, mundo cruel!")
             {
-                helloLabel.text = "Holla, Mundo!";
-                helloLabel.regX = helloLabel.getMeasuredWidth() * 0.5;
-                helloLabel.regY = helloLabel.getMeasuredHeight() * 0.5;
+                helloLabel.setText("Holla, Mundo!");
             }
             else
             {
-                helloLabel.text = "Adios, mundo cruel!";
-                helloLabel.regX = helloLabel.getMeasuredWidth() * 0.5;
-                helloLabel.regY = helloLabel.getMeasuredHeight() * 0.5;
+                helloLabel.setText("Adios, mundo cruel!");
             }
         });
 
