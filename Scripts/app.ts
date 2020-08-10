@@ -3,8 +3,23 @@
     let stage: createjs.Stage;
     let helloLabel: createjs.Text;
     let clickMeButton: createjs.Bitmap;
+    let assets: createjs.LoadQueue;
 
-    // config and initialization
+
+    // This function triggers first and "Preloads" all the assets
+    function Preload()
+    {
+        assets = new createjs.LoadQueue();
+        assets.installPlugin(createjs.Sound);
+        assets.on("complete", Start);
+
+        assets.loadManifest([
+            {id:"clickMeButton", src:"../Assets/images/ClickMeButton.png"}
+        ]);
+    }
+
+    // This function triggers after everything has been preloaded
+    // This function is used for config and initialization
     function Start():void
     {
         console.log("App Started...");
@@ -40,7 +55,8 @@
         stage.addChild(helloLabel);
 
         // button
-        clickMeButton = new createjs.Bitmap("/Assets/images/ClickMeButton.png");
+        clickMeButton = new createjs.Bitmap(assets.getResult("clickMeButton"));
+
         clickMeButton.regX = clickMeButton.getBounds().width * 0.5;
         clickMeButton.regY = clickMeButton.getBounds().height * 0.5;
 
@@ -73,5 +89,5 @@
         });
     }
 
-    window.addEventListener("load", Start);
+    window.addEventListener("load", Preload);
 })();
