@@ -14,7 +14,7 @@
         assets.on("complete", Start);
 
         assets.loadManifest([
-            {id:"clickMeButton", src:"../Assets/images/ClickMeButton.png"}
+            {id:"clickMeButton", src:"./Assets/images/ClickMeButton.png"}
         ]);
     }
 
