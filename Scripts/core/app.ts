@@ -4,6 +4,10 @@
     let assets: createjs.LoadQueue;
     let slotMachineBackground: Core.GameObject;
     let spinButton: UIObjects.Button;
+    let bet1Button: UIObjects.Button;
+    let bet10Button: UIObjects.Button;
+    let bet100Button: UIObjects.Button;
+    let betMaxButton: UIObjects.Button;
 
     let manifest: Core.Item[] = [
         {id:"background", src:"./Assets/images/background.png"},
@@ -67,6 +71,34 @@
 
         spinButton.on("click", ()=>{
             console.log("Spin Button Clicked");
+        });
+
+        bet1Button = new UIObjects.Button("bet1Button", Config.Screen.CENTER_X - 135, Config.Screen.CENTER_Y + 176, true);
+        stage.addChild(bet1Button);
+
+        bet1Button.on("click", ()=>{
+            console.log("bet1Button Button Clicked");
+        });
+
+        bet10Button = new UIObjects.Button("bet10Button", Config.Screen.CENTER_X - 67, Config.Screen.CENTER_Y + 176, true);
+        stage.addChild(bet10Button);
+
+        bet10Button.on("click", ()=>{
+            console.log("bet10Button Button Clicked");
+        });
+
+        bet100Button = new UIObjects.Button("bet100Button", Config.Screen.CENTER_X, Config.Screen.CENTER_Y + 176, true);
+        stage.addChild(bet100Button);
+
+        bet100Button.on("click", ()=>{
+            console.log("bet100Button Button Clicked");
+        });
+
+        betMaxButton = new UIObjects.Button("betMaxButton", Config.Screen.CENTER_X + 67, Config.Screen.CENTER_Y + 176, true);
+        stage.addChild(betMaxButton);
+
+        betMaxButton.on("click", ()=>{
+            console.log("betMaxButton Button Clicked");
         });
        
     }
