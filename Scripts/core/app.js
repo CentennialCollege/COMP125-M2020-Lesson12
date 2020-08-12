@@ -16,6 +16,15 @@
     let middleReel;
     let rightReel;
     let betLine;
+    // symbol tallies
+    let grapes = 0;
+    let bananas = 0;
+    let oranges = 0;
+    let cherries = 0;
+    let bars = 0;
+    let bells = 0;
+    let sevens = 0;
+    let blanks = 0;
     let manifest = [
         { id: "background", src: "./Assets/images/background.png" },
         { id: "banana", src: "./Assets/images/banana.gif" },
@@ -56,37 +65,74 @@
     function Update() {
         stage.update();
     }
-    // app logic goes here
-    function Main() {
+    /* Utility function to check if a value falls within a range of bounds */
+    function checkRange(value, lowerBounds, upperBounds) {
+        if (value >= lowerBounds && value <= upperBounds) {
+            return value;
+        }
+        else {
+            return !value;
+        }
+    }
+    /* When this function is called it determines the betLine results.
+    e.g. Bar - Orange - Banana */
+    function Reels() {
+        var betLine = [" ", " ", " "];
+        var outCome = [0, 0, 0];
+        for (var spin = 0; spin < 3; spin++) {
+            outCome[spin] = Math.floor((Math.random() * 65) + 1);
+            switch (outCome[spin]) {
+                case checkRange(outCome[spin], 1, 27): // 41.5% probability
+                    betLine[spin] = "blank";
+                    blanks++;
+                    break;
+                case checkRange(outCome[spin], 28, 37): // 15.4% probability
+                    betLine[spin] = "grapes";
+                    grapes++;
+                    break;
+                case checkRange(outCome[spin], 38, 46): // 13.8% probability
+                    betLine[spin] = "banana";
+                    bananas++;
+                    break;
+                case checkRange(outCome[spin], 47, 54): // 12.3% probability
+                    betLine[spin] = "orange";
+                    oranges++;
+                    break;
+                case checkRange(outCome[spin], 55, 59): //  7.7% probability
+                    betLine[spin] = "cherry";
+                    cherries++;
+                    break;
+                case checkRange(outCome[spin], 60, 62): //  4.6% probability
+                    betLine[spin] = "bar";
+                    bars++;
+                    break;
+                case checkRange(outCome[spin], 63, 64): //  3.1% probability
+                    betLine[spin] = "bell";
+                    bells++;
+                    break;
+                case checkRange(outCome[spin], 65, 65): //  1.5% probability
+                    betLine[spin] = "seven";
+                    sevens++;
+                    break;
+            }
+        }
+        return betLine;
+    }
+    function buildInterface() {
         // Slot Machine Background
         slotMachineBackground = new Core.GameObject("background", Config.Screen.CENTER_X, Config.Screen.CENTER_Y, true);
         stage.addChild(slotMachineBackground);
         // Buttons
         spinButton = new UIObjects.Button("spinButton", Config.Screen.CENTER_X + 135, Config.Screen.CENTER_Y + 176, true);
         stage.addChild(spinButton);
-        spinButton.on("click", () => {
-            console.log("Spin Button Clicked");
-        });
         bet1Button = new UIObjects.Button("bet1Button", Config.Screen.CENTER_X - 135, Config.Screen.CENTER_Y + 176, true);
         stage.addChild(bet1Button);
-        bet1Button.on("click", () => {
-            console.log("bet1Button Button Clicked");
-        });
         bet10Button = new UIObjects.Button("bet10Button", Config.Screen.CENTER_X - 67, Config.Screen.CENTER_Y + 176, true);
         stage.addChild(bet10Button);
-        bet10Button.on("click", () => {
-            console.log("bet10Button Button Clicked");
-        });
         bet100Button = new UIObjects.Button("bet100Button", Config.Screen.CENTER_X, Config.Screen.CENTER_Y + 176, true);
         stage.addChild(bet100Button);
-        bet100Button.on("click", () => {
-            console.log("bet100Button Button Clicked");
-        });
         betMaxButton = new UIObjects.Button("betMaxButton", Config.Screen.CENTER_X + 67, Config.Screen.CENTER_Y + 176, true);
         stage.addChild(betMaxButton);
-        betMaxButton.on("click", () => {
-            console.log("betMaxButton Button Clicked");
-        });
         // Labels
         jackPotLabel = new UIObjects.Label("99999999", "20px", "Consolas", "#FF0000", Config.Screen.CENTER_X, Config.Screen.CENTER_Y - 175, true);
         stage.addChild(jackPotLabel);
@@ -106,6 +152,33 @@
         // Bet Line
         betLine = new Core.GameObject("bet_line", Config.Screen.CENTER_X, Config.Screen.CENTER_Y - 12, true);
         stage.addChild(betLine);
+    }
+    function interfaceLogic() {
+        spinButton.on("click", () => {
+            // reel test
+            let reels = Reels();
+            // example of how to replace the images in the reels
+            leftReel.image = assets.getResult(reels[0]);
+            middleReel.image = assets.getResult(reels[1]);
+            rightReel.image = assets.getResult(reels[2]);
+        });
+        bet1Button.on("click", () => {
+            console.log("bet1Button Button Clicked");
+        });
+        bet10Button.on("click", () => {
+            console.log("bet10Button Button Clicked");
+        });
+        bet100Button.on("click", () => {
+            console.log("bet100Button Button Clicked");
+        });
+        betMaxButton.on("click", () => {
+            console.log("betMaxButton Button Clicked");
+        });
+    }
+    // app logic goes here
+    function Main() {
+        buildInterface();
+        interfaceLogic();
     }
     window.addEventListener("load", Preload);
 })();
