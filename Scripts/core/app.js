@@ -12,6 +12,10 @@
     let creditLabel;
     let winningsLabel;
     let betLabel;
+    let leftReel;
+    let middleReel;
+    let rightReel;
+    let betLine;
     let manifest = [
         { id: "background", src: "./Assets/images/background.png" },
         { id: "banana", src: "./Assets/images/banana.gif" },
@@ -92,6 +96,16 @@
         stage.addChild(winningsLabel);
         betLabel = new UIObjects.Label("9999", "20px", "Consolas", "#FF0000", Config.Screen.CENTER_X, Config.Screen.CENTER_Y + 108, true);
         stage.addChild(betLabel);
+        // Reel GameObjects
+        leftReel = new Core.GameObject("bell", Config.Screen.CENTER_X - 79, Config.Screen.CENTER_Y - 12, true);
+        stage.addChild(leftReel);
+        middleReel = new Core.GameObject("banana", Config.Screen.CENTER_X, Config.Screen.CENTER_Y - 12, true);
+        stage.addChild(middleReel);
+        rightReel = new Core.GameObject("bar", Config.Screen.CENTER_X + 78, Config.Screen.CENTER_Y - 12, true);
+        stage.addChild(rightReel);
+        // Bet Line
+        betLine = new Core.GameObject("bet_line", Config.Screen.CENTER_X, Config.Screen.CENTER_Y - 12, true);
+        stage.addChild(betLine);
     }
     window.addEventListener("load", Preload);
 })();
