@@ -1,9 +1,8 @@
 (function () {
     // Function scoped Variables
     let stage;
-    let helloLabel;
-    let clickMeButton;
     let assets;
+    let slotMachineBackground;
     let manifest = [
         { id: "background", src: "./Assets/images/background.png" },
         { id: "banana", src: "./Assets/images/banana.gif" },
@@ -42,25 +41,12 @@
     }
     // called every frame
     function Update() {
-        //helloLabel.rotation -= 5;
         stage.update();
     }
     // app logic goes here
     function Main() {
-        // label
-        helloLabel = new UIObjects.Label("Holla, Mundo!", "60px", "Consolas", "#000000", 320, 240, true);
-        stage.addChild(helloLabel);
-        // button
-        clickMeButton = new UIObjects.Button("clickMeButton", 320, 340, true);
-        stage.addChild(clickMeButton);
-        clickMeButton.on("click", () => {
-            if (helloLabel.text == "Adios, mundo cruel!") {
-                helloLabel.setText("Holla, Mundo!");
-            }
-            else {
-                helloLabel.setText("Adios, mundo cruel!");
-            }
-        });
+        slotMachineBackground = new Core.GameObject("background", 320, 240, true);
+        stage.addChild(slotMachineBackground);
     }
     window.addEventListener("load", Preload);
 })();

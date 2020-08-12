@@ -1,9 +1,8 @@
 (function(){
     // Function scoped Variables
     let stage: createjs.Stage;
-    let helloLabel: UIObjects.Label;
-    let clickMeButton: UIObjects.Button;
     let assets: createjs.LoadQueue;
+    let slotMachineBackground: Core.GameObject;
 
     let manifest: Core.Item[] = [
         {id:"background", src:"./Assets/images/background.png"},
@@ -53,33 +52,15 @@
     // called every frame
     function Update():void
     {
-        //helloLabel.rotation -= 5;
-
         stage.update();
     }
 
     // app logic goes here
     function Main():void
     {
-        // label
-        helloLabel = new UIObjects.Label("Holla, Mundo!", "60px", "Consolas", "#000000", 320, 240, true);
-        stage.addChild(helloLabel);
-
-        // button
-        clickMeButton = new UIObjects.Button("clickMeButton", 320, 340, true);
-        stage.addChild(clickMeButton);
-
-        clickMeButton.on("click", ()=>{
-            if(helloLabel.text == "Adios, mundo cruel!")
-            {
-                helloLabel.setText("Holla, Mundo!");
-            }
-            else
-            {
-                helloLabel.setText("Adios, mundo cruel!");
-            }
-        });
-
+        
+        slotMachineBackground = new Core.GameObject("background", 320, 240, true );
+        stage.addChild(slotMachineBackground);
        
     }
 

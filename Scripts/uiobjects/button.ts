@@ -1,40 +1,15 @@
 module UIObjects 
 {
-    export class Button extends createjs.Bitmap
+    export class Button extends Core.GameObject
     {
         // PRIVATE FIELDS (CLASS MEMBERS)
-        private m_isCentered: boolean;
-
-        // PUBLIC PROPERTIES
-        get isCentered():boolean
-        {
-            return this.m_isCentered;
-        }
-
-        set isCentered(value:boolean)
-        {
-            if(value)
-            {
-                this.m_recalculateSize();
-            }
-            else
-            {
-                this.regX = 0;
-                this.regY = 0;
-            }
-
-            this.m_isCentered = value;
-        }
 
         // CONSTRUCTOR(S)
-        constructor(bitmap_asset:string, x:number = 0, y:number=0, isCentered:boolean= false)
+        constructor(bitmap_asset:string, x:number = 0, y:number = 0, isCentered:boolean= false)
         {
-            super(Config.Globals.AssetManifest.getResult(bitmap_asset))
+            super(bitmap_asset, x, y, isCentered)
 
             this.isCentered = isCentered;
-
-            this.x = x;
-            this.y = y;
 
             // mouse events
             this.on("mouseover", this.m_mouseOver);
@@ -43,12 +18,6 @@ module UIObjects
         }
 
         // PRIVATE METHOD(S)
-        private m_recalculateSize():void
-        {
-            this.regX = this.getBounds().width * 0.5;
-            this.regY = this.getBounds().height * 0.5;
-        }
-
         private m_mouseOver():void
         {
             this.alpha = 0.7; // 70% opaque - 30% transparent
