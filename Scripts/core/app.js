@@ -8,6 +8,10 @@
     let bet10Button;
     let bet100Button;
     let betMaxButton;
+    let jackPotLabel;
+    let creditLabel;
+    let winningsLabel;
+    let betLabel;
     let manifest = [
         { id: "background", src: "./Assets/images/background.png" },
         { id: "banana", src: "./Assets/images/banana.gif" },
@@ -50,8 +54,10 @@
     }
     // app logic goes here
     function Main() {
+        // Slot Machine Background
         slotMachineBackground = new Core.GameObject("background", Config.Screen.CENTER_X, Config.Screen.CENTER_Y, true);
         stage.addChild(slotMachineBackground);
+        // Buttons
         spinButton = new UIObjects.Button("spinButton", Config.Screen.CENTER_X + 135, Config.Screen.CENTER_Y + 176, true);
         stage.addChild(spinButton);
         spinButton.on("click", () => {
@@ -77,6 +83,15 @@
         betMaxButton.on("click", () => {
             console.log("betMaxButton Button Clicked");
         });
+        // Labels
+        jackPotLabel = new UIObjects.Label("99999999", "20px", "Consolas", "#FF0000", Config.Screen.CENTER_X, Config.Screen.CENTER_Y - 175, true);
+        stage.addChild(jackPotLabel);
+        creditLabel = new UIObjects.Label("99999999", "20px", "Consolas", "#FF0000", Config.Screen.CENTER_X - 94, Config.Screen.CENTER_Y + 108, true);
+        stage.addChild(creditLabel);
+        winningsLabel = new UIObjects.Label("99999999", "20px", "Consolas", "#FF0000", Config.Screen.CENTER_X + 94, Config.Screen.CENTER_Y + 108, true);
+        stage.addChild(winningsLabel);
+        betLabel = new UIObjects.Label("9999", "20px", "Consolas", "#FF0000", Config.Screen.CENTER_X, Config.Screen.CENTER_Y + 108, true);
+        stage.addChild(betLabel);
     }
     window.addEventListener("load", Preload);
 })();
