@@ -3,6 +3,7 @@
     let stage: createjs.Stage;
     let assets: createjs.LoadQueue;
     let slotMachineBackground: Core.GameObject;
+    let spinButton: UIObjects.Button;
 
     let manifest: Core.Item[] = [
         {id:"background", src:"./Assets/images/background.png"},
@@ -58,9 +59,15 @@
     // app logic goes here
     function Main():void
     {
-        
-        slotMachineBackground = new Core.GameObject("background", 320, 240, true );
+        slotMachineBackground = new Core.GameObject("background", Config.Screen.CENTER_X, Config.Screen.CENTER_Y, true );
         stage.addChild(slotMachineBackground);
+
+        spinButton = new UIObjects.Button("spinButton", Config.Screen.CENTER_X + 135, Config.Screen.CENTER_Y + 176, true);
+        stage.addChild(spinButton);
+
+        spinButton.on("click", ()=>{
+            console.log("Spin Button Clicked");
+        });
        
     }
 
